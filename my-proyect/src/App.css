@@ -31,8 +31,21 @@ tr:hover td {
 .inputSearch :focus{
   outline: none;
 }
+.search{
+  display: flex;
+  justify-content: end;
+}
 .inputSearch{
   border-radius: 5px;
-  background-color: #fff;
+  background-color: #f3eded;
   backdrop-filter: blur(8px);
+}
+select{
+  border-radius: 5px;
+  background-color: #f3eded;
+}
+p{
+  padding: 10px;
+  display: flex;
+  justify-content: center;
 }

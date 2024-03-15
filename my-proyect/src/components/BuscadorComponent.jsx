@@ -10,7 +10,7 @@ const BuscadorComponent = ({ handleBuscar }) => {
   };
 
   return (
-    <div>
+    <div className="search">
       <input
       className="inputSearch"
         onChange={handleInputChange}
