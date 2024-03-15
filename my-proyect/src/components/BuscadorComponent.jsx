@@ -10,9 +10,9 @@ const BuscadorComponent = ({ handleBuscar }) => {
   };
 
   return (
-    <div className="search">
+    <div>
       <input
-      className="form-control"
+      className="inputSearch"
         onChange={handleInputChange}
         value={buscarInput}
         type="text"

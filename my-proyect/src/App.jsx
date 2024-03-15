@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import TableComponent from "./components/TableComponent";
 import BuscadorComponent from "./components/BuscadorComponent";
-import SelectComponent from "./components/SelectComponent";
-import { GeneralContext } from "./context/GeneralContext";
+import RegistrarComponent from "./components/RegistrarComponent";
 import "./App.css";
 
 function App() {
   const [buscarInput, setBuscarInput] = useState("");
-  const { seleccion } = useContext(GeneralContext);
+  const [contador, setContador]= useState(5)
   const Personas = [
     { id: "1", nombre: "Maria", apellido: "Peralta", descripcion: "Locura total" },
     { id: "2", nombre: "Juan", apellido: "Angulo", descripcion: "Casa de campo" },
@@ -33,46 +32,30 @@ function App() {
   const handleBuscar = (inputValue) => {
     setBuscarInput(inputValue);
   };
-
   const filteredPersonas = Personas.filter(
     (persona) =>
       persona.id.toLowerCase().includes(buscarInput.toLowerCase()) ||
       persona.nombre.toLowerCase().includes(buscarInput.toLowerCase()) ||
       persona.apellido.toLowerCase().includes(buscarInput.toLowerCase()) ||
       persona.descripcion.toLowerCase().includes(buscarInput.toLowerCase())
-  );
-  const { pagina } = useContext(GeneralContext);
-  console.log(pagina)
+  ).slice(0,contador)
 
-  let filteredData = Personas;
-  const selectPaginacion = () => {
-    switch (pagina) {
-      case '5':
-        filteredData = filteredData.slice(0, 5)
-        break;
-      case '10':
-        filteredData = filteredData.slice(0, 10)
-        break;
-      case '15':
-        filteredData = filteredData.slice(0, 15)
-        break;
-      case '20':
-        filteredData = filteredData.slice(0, 20)
-        break;
-    
-      default:
-        filteredData
-        break;
-    }
+  const handleContador = (e)=>{
+    setContador(Number(e.target.value))
   }
-
-  selectPaginacion();
+  const optionContador = [5,10,15,20]
   return (
     <>
-      <SelectComponent />
+        <select value={contador} name="" id="" onChange={handleContador} className="ll">
+          {optionContador.map((opcion)=>(
+          <option key={opcion} value={opcion}>{opcion}</option>
+          ))}
+        </select>  
       <BuscadorComponent handleBuscar={handleBuscar} />
       <TableComponent Personas={filteredPersonas} />
-      <p>{seleccion} of 20</p>
+      <RegistrarComponent registros={filteredPersonas.length}
+      personas={filteredPersonas.length}>
+      </RegistrarComponent>      
     </>
   );
 }
